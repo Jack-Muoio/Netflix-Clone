@@ -10,8 +10,6 @@ import Footer from '../../components/Footer/Footer'
 import { toast } from 'react-toastify'
 
 const Home = () => {
-    console.log("I am alive")
-
     const notifyUnderConstruction = (featureName) => {
         toast.info(`🎬 ${featureName} is not implemented yet! Check back soon.`, {
           position: "top-center",

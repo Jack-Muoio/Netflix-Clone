@@ -24,16 +24,28 @@ const Navbar = () => {
     });
   };
 
-    useEffect(() => {
-        window.addEventListener('scroll', () => {
-            if(window.scrollY >= 460) {
-                navRef.current.classList.add('nav-dark')
-            }
-            else {
-                navRef.current.classList.remove('nav-dark')
-            }
-        })
-    },[])
+useEffect(() => {
+    const handleScroll = () => {
+        const screenWidth = window.innerWidth;
+        let scrollThreshold = 460; 
+
+        if (screenWidth < 768) {
+            scrollThreshold = 200;
+        } else if (screenWidth < 1024) {
+            scrollThreshold = 350;
+        }
+
+        if (window.scrollY >= scrollThreshold) {
+            navRef.current.classList.add('nav-dark');
+        } else {
+            navRef.current.classList.remove('nav-dark');
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+}, []);
 
   return (
     <div ref={navRef} className='navbar'>

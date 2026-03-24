@@ -32,8 +32,6 @@ const TitleCards = ({ title, category }) => {
     fetch(`https://api.themoviedb.org/3/movie/${category ? category : "now_playing"}`, options)
     .then((res) => res.json())
     .then((res) => {
-      // Log and Set in the SAME block
-      console.log("TMDB Data Received:", res.results);
       if (res.results) {
         setApiData(res.results);
       }
