@@ -28,8 +28,8 @@ const TitleCards = ({ title, category }) => {
 
   useEffect(() => {
 
-    fetch(`https://api.themoviedb.org/3/movie/${category?category:"now_playing"}`, options)
-    .then((res) => res.json())
+    fetch(`https://api.themoviedb.org/3/movie/${category ? category : "now_playing"}`, options)
+    .then((res) => res.json()) 
     .then((res) => setApiData(res.results))
     .catch((err) => console.error(err));
 
@@ -45,7 +45,7 @@ const TitleCards = ({ title, category }) => {
     element.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => element.removeEventListener("wheel", handleWheel);
-  }, []);
+  }, [category]);
 
   return (
     <div className="title-cards">
@@ -57,7 +57,7 @@ const TitleCards = ({ title, category }) => {
               <img src={`https://image.tmdb.org/t/p/w500`+card.backdrop_path} alt="" />
               <p>{card.original_title}</p>
             </Link>
-          );
+          )
         })}
       </div>
     </div>

@@ -11,6 +11,8 @@
     display: flex;
     gap: 10px;
     overflow-x: scroll;
+    padding: 20px 0;
+    margin: -20px 0; 
 }
 
 .card-list::-webkit-scrollbar {
@@ -25,6 +27,25 @@
 
 .card-list .card {
     position: relative;
+    transition: transform 0.5s ease, z-index 0.5s ease;
+    cursor: pointer;
+}
+
+.card-list .card:hover {
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.card-list .card img {
+    width: 240px;
+    border-radius: 4px;
+    transition: opacity 0.5s ease, filter 0.5s ease;
+}
+
+.card-list .card:hover img {
+    opacity: 0.8;          
+    filter: brightness(0.8);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5); 
 }
 
 .card-list .card p{
@@ -33,4 +54,51 @@
     right: 10px;
     text-decoration: none;
     color: #fff;
+}
+
+.title-cards h2, 
+.hero-caption h1 {
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 1px;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.card-list p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+@media (max-width: 800px) {
+    .title-cards{
+        margin-top: 20px;
+        margin-bottom: 0;
+    }
+    
+    .title-cards h2 {
+        font-size: 20px;
+    }
+
+    .card-list img {
+        width: 200px;
+    }
+
+    .card-list p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    .title-cards h2 {
+        font-size: 14px;
+    }
+
+    .card-list img {
+        width: 165px;
+    }
+
+    .card-list p {
+        font-size: 10px;
+    }
 }

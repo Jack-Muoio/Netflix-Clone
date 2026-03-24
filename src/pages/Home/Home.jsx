@@ -7,8 +7,22 @@ import play_icon from '../../assets/play_icon.png'
 import info_icon from '../../assets/info_icon.png'
 import TitleCards from '../../components/TitleCards/Titlecards'
 import Footer from '../../components/Footer/Footer'
+import { toast } from 'react-toastify'
 
 const Home = () => {
+
+    const notifyUnderConstruction = (featureName) => {
+        toast.info(`🎬 ${featureName} is not implemented yet! Check back soon.`, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark", 
+        });
+      };
+
   return (
     <div className='home'>
         <Navbar/>
@@ -18,11 +32,11 @@ const Home = () => {
                 <img src={hero_title} alt="" className='caption-img'/>
                 <p>Discovering his ties to a secret ancient order, a young man living in modern Istanbul embarks on a quest to save the city from an immortal enemy. </p>
                 <div className="hero-btns">
-                    <button className='btn'>
+                    <button className='btn' onClick={() => notifyUnderConstruction("Play")}>
                         <img src={play_icon} alt="" />
                         Play
                     </button>
-                    <button className='btn dark-btn'>
+                    <button className='btn dark-btn' onClick={() => notifyUnderConstruction("More Info")}>
                         <img src={info_icon} alt="" />
                         More Info
                     </button>
