@@ -16,11 +16,14 @@ const Player = () => {
     type: ""
   })
 
+  const token = import.meta.env.VITE_TMDB_TOKEN;
+  console.log("Sending Token:", token ? token.substring(0, 10) + "..." : "EMPTY");
+
   const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYjFkNzM2NmM1MjA0MjQ4YmRhODBhYTYyNGI4ZmU1MCIsIm5iZiI6MTc3Mzg3MTEzMC4yNjksInN1YiI6IjY5YmIyMDFhMDkwMmMxZDhlODA1MjQ0ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YMScGlZtYA8KPHmWeXIhaFidNlJRrRxkmrXJOLa6AhA'
+    Authorization: `Bearer ${token}`,
     }
   };
 
@@ -36,15 +39,13 @@ const Player = () => {
 }, [id]); 
 
 
-
-
   return (
     <div className='player'>
       <img src={back_arrow_icon } alt="" onClick={() => {navigate('/')}}/>
       <iframe width="90%" height="90%" src={`https://www.youtube.com/embed/${apiData.key}`}
       title='trailer' frameBorder='0' allowFullScreen></iframe>
       <div className="player-info">
-        <p>{apiData.published_at.slice(0, 10)}</p>
+        <p>{apiData.published_at ? apiData.published_at.slice(0, 10) : "No Date Available"}</p>
         <p>{apiData.name}</p>
         <p>{apiData.type}</p>
       </div>

@@ -7,14 +7,15 @@ const TitleCards = ({ title, category }) => {
 
     const [apiData, setApiData] = useState([])
 
+    const token = import.meta.env.VITE_TMDB_TOKEN;
+
   const cardsRef = useRef();
 
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlYjFkNzM2NmM1MjA0MjQ4YmRhODBhYTYyNGI4ZmU1MCIsIm5iZiI6MTc3Mzg3MTEzMC4yNjksInN1YiI6IjY5YmIyMDFhMDkwMmMxZDhlODA1MjQ0ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.YMScGlZtYA8KPHmWeXIhaFidNlJRrRxkmrXJOLa6AhA",
+      Authorization: `Bearer ${token}`,
     },
   };
 
@@ -29,8 +30,14 @@ const TitleCards = ({ title, category }) => {
   useEffect(() => {
 
     fetch(`https://api.themoviedb.org/3/movie/${category ? category : "now_playing"}`, options)
-    .then((res) => res.json()) 
-    .then((res) => setApiData(res.results))
+    .then((res) => res.json())
+    .then((res) => {
+      // Log and Set in the SAME block
+      console.log("TMDB Data Received:", res.results);
+      if (res.results) {
+        setApiData(res.results);
+      }
+    })
     .catch((err) => console.error(err));
 
     const element = cardsRef.current;
@@ -51,7 +58,7 @@ const TitleCards = ({ title, category }) => {
     <div className="title-cards">
       <h2>{title ? title : "Popular on Netflix"}</h2>
       <div className="card-list" ref={cardsRef}>
-        {apiData.map((card, index) => {
+        {apiData && apiData.map((card, index) => {
           return (
             <Link to={`/player/${card.id}`} className="card" key={index}>
               <img src={`https://image.tmdb.org/t/p/w500`+card.backdrop_path} alt="" />

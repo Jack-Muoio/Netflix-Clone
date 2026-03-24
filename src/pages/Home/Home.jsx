@@ -5,11 +5,12 @@ import hero_banner from '../../assets/hero_banner.jpg'
 import hero_title from '../../assets/hero_title.png'
 import play_icon from '../../assets/play_icon.png'
 import info_icon from '../../assets/info_icon.png'
-import TitleCards from '../../components/TitleCards/Titlecards'
+import TitleCards from '../../components/TitleCards/TitleCards'
 import Footer from '../../components/Footer/Footer'
 import { toast } from 'react-toastify'
 
 const Home = () => {
+    console.log("I am alive")
 
     const notifyUnderConstruction = (featureName) => {
         toast.info(`🎬 ${featureName} is not implemented yet! Check back soon.`, {
